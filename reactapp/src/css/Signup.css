@@ -1,0 +1,55 @@
+/* Bordered form */
+form {
+    border: 1px solid black;
+    margin: auto;
+    border-radius: 8px;
+    position: relative;
+    top: 35px;
+    width: 400px;
+    padding-bottom: 10px;
+    padding-top: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: black;
+    color: white;
+    -webkit-box-shadow: 6px 4px 89px -15px rgba(0, 0, 0, 0.59);
+    -moz-box-shadow: 6px 4px 89px -15px rgba(0, 0, 0, 0.59);
+    box-shadow: 6px 4px 89px -15px rgba(0, 0, 0, 0.59);
+  }
+  h1 {
+    text-align: center;
+  }
+  input {
+    width: 100%;
+    background-color: antiquewhite;
+    height: 40px;
+    border-radius: 5px;
+    outline: none;
+    margin-top: 5px;
+    margin-bottom: 15px;
+  }
+  span {
+    font-size: 20px;
+  }
+  button{
+    width: 100px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: rgb(4, 0, 255);
+    color: white;
+    border: none;
+    margin-top: 20px;
+  }
+  button:hover{
+    background-color: rgb(55, 0, 255);
+  }
+  .container p{
+    text-align: center;
+    margin-top: 10px;
+    font-size: 20px;
+  }
+  .btn{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
