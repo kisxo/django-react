@@ -11,14 +11,14 @@ import Home from "./components/Home"
 function App() {
   return (
     <div className="App">
-      
-     <Routes>
-     <Route path="/" element={<Navigate to={"/login"}/>}/>
-     <Route path="/login" element={<Login/>}/>
-      <Route path="/signup" element={<Signup/>}/>
-      <Route path="/home" element={<Home/>}/>
-     </Routes>
-     
+
+      <Routes>
+        <Route path="/" element={<Navigate to={"/login"} />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/home" element={<Home />} />
+      </Routes>
+
     </div>
   );
 }

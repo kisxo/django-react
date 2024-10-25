@@ -17,11 +17,11 @@ function Signup() {
   const copysignUpInfo = {...signUpInfo};
   copysignUpInfo[name]=value;
   setSignupInfo(copysignUpInfo);
-  
+
 
   }
   console.log('signUpInfo ->',signUpInfo);
-  
+
   const handleSignup = async (e)=>{
     e.preventDefault();
     const {email,username,password} = signUpInfo;
@@ -29,7 +29,7 @@ function Signup() {
         return handleError('All Filled are required')
       }
       try{
-        const url = "http://localhost:3000";
+        const url = "http://localhost:3000/signup";
         const response = await fetch(url,{
           method:"post",
           headers:{
@@ -38,6 +38,7 @@ function Signup() {
           body: JSON.stringify(signUpInfo)
         });
         const result = await response.json();
+        console.log(result.email)
        const {success, message , error} = result;
        if(success){
         handleSuccess(message);
@@ -58,16 +59,16 @@ function Signup() {
     <form onSubmit={handleSignup}>
       <div className="container">
       <h1>Sign Up</h1>
-    <span>Email</span>    
+    <span>Email</span>
 
       <div className="wrapper">
       <input  type="email" id="email" onChange={handleChange} value={signUpInfo.email} name="email" placeholder=" "/>
-</div><span>Set Username</span>    
+</div><span>Set Username</span>
 
 <div className="wrapper">
 <input  type="text" id="username" onChange={handleChange} value={signUpInfo.username} name="username" placeholder=" "/>
 </div>
-<span>Password</span>    
+<span>Password</span>
 
 <div className="wrapper">
       <input  type="password" id="password" onChange={handleChange} value={signUpInfo.password} name="password" placeholder=" "/>

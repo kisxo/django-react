@@ -16,11 +16,11 @@ function Login() {
   const copyloginInfo = {...loginInfo};
   copyloginInfo[name]=value;
   setloginInfo(copyloginInfo);
-  
+
 
   }
   console.log('loginInfo ->',loginInfo);
-  
+
   const handleLogin = async (e)=>{
     e.preventDefault();
     const {email,password} = loginInfo;
@@ -28,7 +28,7 @@ function Login() {
         return handleError('All Filled are required')
       }
       try{
-        const url = "###API";
+        const url = "http://localhost:3000/";
         const response = await fetch(url,{
           method:"post",
           headers:{
@@ -37,8 +37,10 @@ function Login() {
           body: JSON.stringify(loginInfo)
         });
         const result = await response.json();
+        console.log(result)
        const {success, message , jwtToken,username, error} = result;
        if(success){
+        // console.log(success)
         handleSuccess(message);
         localStorage.setItem('token',jwtToken)
         localStorage.setItem('loggedInuser',username)
@@ -56,17 +58,17 @@ function Login() {
           handleError(err);
       }
   }
-  
+
   return (
     <form onSubmit={handleLogin} >
       <div className="container">
       <h1>Login</h1>
-    <span>Email</span>    
+    <span>Email</span>
 
       <div className="wrapper">
       <input  type="email" id="email"  onChange={handleChange} value={loginInfo.email} name="email" placeholder=" "/>
 </div>
-<span>Password</span>    
+<span>Password</span>
 
 <div className="wrapper">
       <input  type="password"  onChange={handleChange} value={loginInfo.password} id="password" name="password" placeholder=" "/>
