@@ -1,56 +1,80 @@
 import React, { useState } from 'react'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import '../css/Login.css'
-import { Link, useNavigate } from 'react-router-dom'
-import axios from 'axios';
-function Login() {
-  const navigate = useNavigate()
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-const handleSubmit = ()=>{
-  const hostname = "https://"+window.location.host;
+import { ToastContainer } from 'react-toastify'
+import { handleError, handleSuccess } from './error'
 
+function Login() {
+  const [loginInfo , setloginInfo] = useState({
+    email: '',
+    password: ''
+
+  })
+  const navigate = useNavigate();
+  const handleChange = (e)=>{
+  const {name,value} = e.target;
+  const copyloginInfo = {...loginInfo};
+  copyloginInfo[name]=value;
+  setloginInfo(copyloginInfo);
   
 
-  async function submit(event) {
-    event.preventDefauld();
-
-    try{
-      await axios.post(hostname+"/_allauth/app/v1/auth/login",{
-        email,password
-      }).then(res=>{
-        if(res.data=="exist"){
-        alert("Uaer Already Exist")
-      }else if(res.data=="notexist"){
-        navigate("/home",{state:{id:email}})
-      }
-      }).catch(event=>{
-        alert("Wrong Details")
-        console.log(event)
-      })
-    }
-    catch(event){
-      console.log(event)
-    }
   }
-}
+  console.log('loginInfo ->',loginInfo);
+  
+  const handleLogin = async (e)=>{
+    e.preventDefault();
+    const {email,password} = loginInfo;
+      if(!email || !password){
+        return handleError('All Filled are required')
+      }
+      try{
+        const url = "###API";
+        const response = await fetch(url,{
+          method:"post",
+          headers:{
+            'content-type':"application/json"
+          },
+          body: JSON.stringify(loginInfo)
+        });
+        const result = await response.json();
+       const {success, message , jwtToken,username, error} = result;
+       if(success){
+        handleSuccess(message);
+        localStorage.setItem('token',jwtToken)
+        localStorage.setItem('loggedInuser',username)
+
+        setTimeout(()=>{
+          navigate('/home')
+        },2000)
+       }else if(error){
+        const details = error?.details[0].message;
+        handleError(details)
+       }else if(!success){
+        handleError(message);
+       }
+      }catch(err){
+          handleError(err);
+      }
+  }
   
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleLogin} >
       <div className="container">
       <h1>Login</h1>
     <span>Email</span>    
 
       <div className="wrapper">
-      <input required type="email" id="email" onChange={(event)=>{setEmail(event.target.value)}} name="email" placeholder=" "/>
+      <input  type="email" id="email"  onChange={handleChange} value={loginInfo.email} name="email" placeholder=" "/>
 </div>
 <span>Password</span>    
 
 <div className="wrapper">
-      <input required type="password" onChange={(event)=>{setPassword(event.target.value)}} id="password" name="email" placeholder=" "/>
+      <input  type="password"  onChange={handleChange} value={loginInfo.password} id="password" name="password" placeholder=" "/>
 </div>
       <div className="btn"><button type="submit">Login</button></div>
       <p>New User ? <Link to="/signup"  style={{ textDecoration: 'none' }}>Signup</Link></p>
       </div>
+      <ToastContainer/>
 
   </form>
 
