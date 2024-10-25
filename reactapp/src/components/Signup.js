@@ -14,21 +14,21 @@ function Signup() {
       <h1>Sign Up</h1>
     <span>Email</span>    
 
-      <div class="wrapper">
-      <input required type="email" id="" name="email" placeholder=" "/>
+      <div className="wrapper">
+      <input required type="email" id="email" name="email" placeholder=" "/>
 </div><span>Set Username</span>    
 
-<div class="wrapper">
-<input required type="text" id="" name="username" placeholder=" "/>
+<div className="wrapper">
+<input required type="text" id="username" name="username" placeholder=" "/>
 </div>
 <span>Password</span>    
 
-<div class="wrapper">
-      <input required type="password" id="" name="password" placeholder=" "/>
+<div className="wrapper">
+      <input required type="password" id="password" name="password" placeholder=" "/>
 </div><span>Confirm Password</span>    
 
-<div class="wrapper">
-      <input required type="password" id="" name="cPassword" placeholder=" "/>
+<div className="wrapper">
+      <input required type="password" id="cpassword" name="cPassword" placeholder=" "/>
 </div>
      <div className="btn"> <button type="submit">Sign Up</button></div>
       <p>Already Have an Account ? <Link to="/"  style={{ textDecoration: 'none' }}>Login</Link></p>
